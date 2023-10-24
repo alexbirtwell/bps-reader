@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('readings', function (Blueprint $table) {
             $table->id();
             $table->string('source_id')->nullable();
-            $table->string('value')->nullable();
-            $table->mediumText('raw')->nullable();
-            $table->timestamp('sourceTimestamp')->nullable();
+            $table->integer('flow')->nullable();
+            $table->integer('accumulative_flow')->nullable();
+            $table->integer('status')->nullable();
+            $table->integer('pressure')->nullable();
+            $table->integer('temperature')->nullable();
+            $table->integer('standby')->nullable();
             $table->timestamps();
         });
     }

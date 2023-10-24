@@ -17,21 +17,4 @@ use Symfony\Component\ErrorHandler\Debug;
 |
 */
 
-Route::middleware(['cors'])->post('/in/{key}', function (Request $request, $key) {
-    if ($key !== env('SECURE_KEY')) {
-        return response()->json(['error' => 'Invalid API key'], 401);
-    }
-
-    $data = explode($request->get('body'), '|');
-    foreach($data as $d) {
-        $reading = json_decode($d);
-        $created[] = Reading::create([
-            'raw' => $d,
-            'source_id' => data_get($reading, 'sourceId', ''),
-            'value' => data_get($reading, 'value', ''),
-            'sourceTimestamp' => data_get($reading, 'sourceTimestamp', null),
-        ]);
-    }
-
-    return response()->json(['success' => true, 'created' => collect($created)->pluck('id')->toArray()]);
-});
+Route::middleware(['cors'])->post('/in/{key}', [\App\Http\Controllers\LogReadingsController::class, 'create']);
