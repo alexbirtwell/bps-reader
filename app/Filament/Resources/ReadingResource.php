@@ -85,6 +85,22 @@ class ReadingResource extends Resource
                         static fn (Builder $query, array $data): Builder => $query
                             ->whereBetween('created_at', $data)
                     ),
+//                Tables\Filters\SelectFilter::make('group_by_time')
+//                    ->label('Group By Time')
+//                    ->options([
+//                        'second' => 'Second',
+//                        'minute' => 'Minute',
+//                        'hour' => 'Hour',
+//                    ])
+//                    ->default('second')
+//                ->query(
+//                    static fn (Builder $query, array $data): Builder =>
+//                        match($data['value']) {
+//                            'hour' => $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') as created_at, AVG(flow) as flow, AVG(accumulative_flow) as accumulative_flow, AVG(status) as status, AVG(pressure) as pressure, AVG(temperature) as temperature, AVG(standby) as standby")->groupByRaw("hour( created_at ) , day( created_at ), month( created_at )"),
+//                            'minute' => $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') as created_at, AVG(flow) as flow, AVG(accumulative_flow) as accumulative_flow, AVG(status) as status, AVG(pressure) as pressure, AVG(temperature) as temperature, AVG(standby) as standby")->groupByRaw("minute ( created_at ) , hour( created_at ) , day( created_at ), month( created_at )"),
+//                            'second' => $query,
+//                        }
+//                )
             ])
             ->filtersLayout(FiltersLayout::AboveContent)
             ->actions([

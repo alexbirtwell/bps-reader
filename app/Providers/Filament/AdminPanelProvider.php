@@ -2,6 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\AccumulativeFlow;
+use App\Filament\Widgets\CurrentReadings;
+use App\Filament\Widgets\Flow;
+use App\Filament\Widgets\Pressure;
+use App\Filament\Widgets\Temperature;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -35,10 +40,13 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            //->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                CurrentReadings::class,
+                Flow::class,
+                AccumulativeFlow::class,
+                Pressure::class,
+                Temperature::class
             ])
             ->middleware([
                 EncryptCookies::class,

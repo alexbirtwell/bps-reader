@@ -22,38 +22,38 @@ class Flow extends ChartWidget
         'datasets' => [
             [
                 'label' => 'Flow',
-                'backgroundColor' => '#F85DC6',
-                'borderColor' => '#F85DC6',
-                'pointBackgroundColor' => '#F85DC6',
+                'backgroundColor' => config('readings.colors.flow'),
+                'borderColor' => config('readings.colors.flow'),
+                'pointBackgroundColor' => config('readings.colors.flow'),
                 'data' => $data->map(fn ($record) => (int) $record->flow),
             ],
             [
                 'label' => 'Accumulative Flow',
-                'backgroundColor' => '#7F4CFD',
-                'borderColor' => '#7F4CFD',
-                'pointBackgroundColor' => '#7F4CFD',
+                'backgroundColor' => config('readings.colors.accumulative_flow'),
+                'borderColor' => config('readings.colors.accumulative_flow'),
+                'pointBackgroundColor' => config('readings.colors.accumulative_flow'),
                 'data' => $data->map(fn ($record) => (int) $record->accumulative_flow),
             ],
             [
 
                 'label' => 'Pressure',
-                'backgroundColor' => '#40BEE5',
-                'borderColor' => '#40BEE5',
-                'pointBackgroundColor' => '#40BEE5',
+                'backgroundColor' => config('readings.colors.pressure'),
+                'borderColor' => config('readings.colors.pressure'),
+                'pointBackgroundColor' => config('readings.colors.pressure'),
                 'data' => $data->map(fn ($record) => (int) $record->pressure),
             ],
             [
                 'label' => 'Temperature',
-                'backgroundColor' => '#FDCC2E',
-                'borderColor' => '#FDCC2E',
-                'pointBackgroundColor' => '#FDCC2E',
+                'backgroundColor' => config('readings.colors.temperature'),
+                'borderColor' => config('readings.colors.temperature'),
+                'pointBackgroundColor' => config('readings.colors.temperature'),
                 'data' => $data->map(fn ($record) => (int) $record->temperature),
             ],
             [
                 'label' => 'Status',
-                'backgroundColor' => '#CEF217',
-                'borderColor' => '#CEF217',
-                'pointBackgroundColor' => '#CEF217',#CEF217
+                'backgroundColor' => config('readings.colors.status'),
+                'borderColor' => config('readings.colors.status'),
+                'pointBackgroundColor' => config('readings.colors.status'),#CEF217
                 'data' => $data->map(fn ($record) => (int) $record->pressure),
             ],
         ],
