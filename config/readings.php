@@ -1,6 +1,6 @@
 <?php
     return [
-        'log' => env('LOG_READINGS', false),
+        'log' => env('LOG_READINGS',true),
         'mappings' => [
             //source //label
             '16843776' => 'accumulative_flow',
@@ -20,7 +20,7 @@
             'standby'  => '#EBE007',
         ],
         'modifications' => [
-            'accumulative_flow' => fn ($value) => ['*', 10],
+            'accumulative_flow' => ['*', 10],
             'pressure' => ['/', 100],
             'temperature' => ['/', 10],
         ]

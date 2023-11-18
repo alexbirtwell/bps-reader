@@ -19,6 +19,13 @@ class ListReadings extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            ExportAction::make()
+                ->exports([
+                    ExcelExport::make()
+                        ->fromTable()
+                        ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
+                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV),
+                ]),
         ];
     }
 
