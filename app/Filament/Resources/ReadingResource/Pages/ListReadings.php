@@ -7,6 +7,9 @@ use App\Filament\Resources\ReadingsResource\Widgets\Flow;
 use Filament\Actions;
 use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Pages\ListRecords;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ListReadings extends ListRecords
 {
@@ -24,7 +27,9 @@ class ListReadings extends ListRecords
                     ExcelExport::make()
                         ->fromTable()
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV),
+                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                        ->queue()
+                        ->withChunkSize(1000)
                 ]),
         ];
     }
