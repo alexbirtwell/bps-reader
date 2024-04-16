@@ -29,7 +29,7 @@ class LogReadingsController extends Controller
             $fullSource = data_get($d, 'ID', '');
             $id = $this->getIdFromSourceId($fullSource);
             $fieldSource = $this->mapField($id);
-            $insert[data_get(config('readings.mappings'), $fieldSource, 'source')] =  data_get($d, 'Value', '');
+            $insert[data_get(config('readings.mappings'), $fieldSource, 'source')] =  data_get($d, 'Value', 0);
         }
 
         $insert['source_id'] = $this->getSourceIp($fullSource);

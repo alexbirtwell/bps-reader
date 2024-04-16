@@ -53,14 +53,30 @@ class ReadingResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('flow')
+                    ->summarize([
+                        Tables\Columns\Summarizers\Range::make(),
+                        Tables\Columns\Summarizers\Average::make(),
+                    ])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('accumulative_flow')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                    ->summarize([
+                        Tables\Columns\Summarizers\Range::make(),
+                        Tables\Columns\Summarizers\Average::make(),
+                    ])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pressure')
+                    ->summarize([
+                        Tables\Columns\Summarizers\Range::make(),
+                        Tables\Columns\Summarizers\Average::make(),
+                    ])
                     ->sortable(),
                 Tables\Columns\TextColumn::make('temperature')
+                    ->summarize([
+                        Tables\Columns\Summarizers\Range::make(),
+                        Tables\Columns\Summarizers\Average::make(),
+                    ])
+                    ->sortable(),
+                 Tables\Columns\TextColumn::make('status')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('standby')
                     ->sortable(),
@@ -71,7 +87,7 @@ class ReadingResource extends Resource
                     ->columnSpan(2)
                     ->form([
                         Forms\Components\DateTimePicker::make('from')
-                            ->default(now()->subWeek()->startOfDay()->toDateTimeString())
+                            ->default(now()->subHours(12)->toDateTimeString())
                             ->maxDate(fn (Get $get): string => $get('to')),
                         Forms\Components\DateTimePicker::make('to')
                             ->formatStateUsing(fn (string $state): string => Date::parse($state)

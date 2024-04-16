@@ -29,7 +29,7 @@ class ListReadings extends ListRecords
                         ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
                         ->queue()
-                        ->withChunkSize(1000)
+                        ->withChunkSize(1000),
                 ]),
         ];
     }
