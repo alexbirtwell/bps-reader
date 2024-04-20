@@ -10,6 +10,15 @@
             '16844288' => 'temperature',
             '16847104' => 'standby',
         ],
+        'types' => [
+            //source //label
+            'accumulative_flow' => 'int',
+            'flow' => 'int',
+            'pressure' => 'int',
+            'status' => 'int',
+            'temperature' => 'int',
+            'standby' => 'bool',
+        ],
         'colors' => [
             //source //label
             'accumulative_flow' => '#F85DC6',
