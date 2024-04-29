@@ -4,9 +4,12 @@ namespace App\Filament\Resources\ReadingResource\Pages;
 
 use App\Filament\Resources\ReadingResource;
 use App\Filament\Resources\ReadingsResource\Widgets\Flow;
+use App\Models\Reading;
 use Filament\Actions;
+use Filament\Forms\Components\DatePicker;
 use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\HtmlString;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
@@ -17,20 +20,27 @@ class ListReadings extends ListRecords
 
     protected static string $resource = ReadingResource::class;
     protected ?string $maxContentWidth = 'full';
+    public ?string $exportTo = null;
+    public ?string $exportFrom = null;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),
             ExportAction::make()
-                ->exports([
-                    ExcelExport::make()
-                        ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
-                        ->queue()
-                        ->withChunkSize(1000),
-                ]),
+                ->requiresConfirmation()
+                ->modalContent( new HtmlString('
+                    <div class="p-4">
+                        <p>This will export the whole data for the date range selected in the table below. Exporting a large number of records may take some time. Please be patient.</p>
+                    </div>'))
+                ->exports(
+                   [
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
+                            ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                            ->withChunkSize(10000),
+                    ]),
         ];
     }
 
